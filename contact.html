@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Tiger MasterLube Center</title>
+    <link rel="stylesheet" href="capstone1.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Tiger MasterLube Center</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="schedule.html">Schedule Appointment</a>
+            <a href="service-history.html">Service History</a>
+            <a href="profile.html">Profile</a>
+            <a href="faqs.html">FAQs</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="place-holder12"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="contact-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to reach out to us using the form below or contact us directly:</p>
+            <ul>
+                <li><strong>Email:</strong> support@tigermasterlube.com</li>
+                <li><strong>Phone:</strong> 123-456-7890</li>
+            </ul>
+            <form id="contact-form">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="8" placeholder="Your Message" required></textarea>
+                
+                <button type="submit" class="button primary">Send Message</button>
+            </form>
+            <div id="confirmation-message" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
+                Your message has been sent! We'll get back to you soon.
+            </div>
+        </section>
+    
+        <section class="messages-section">
+            <h2>Sent Messages</h2>
+            <ul id="messages-list">
+                <!-- Sent messages will appear here -->
+            </ul>
+        </section>
+    </main>
+    
+    <script src="contact.js"></script>
+
+</body>
+</html>

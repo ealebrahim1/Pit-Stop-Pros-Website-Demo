@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service History - Tiger MasterLube Center</title>
+    <link rel="stylesheet" href="capstone1.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Tiger MasterLube Center</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="schedule.html">Schedule Appointment</a>
+            <a href="service-history.html">Service History</a>
+            <a href="profile.html">Profile</a>
+            <a href="faqs.html">FAQs</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="place-holder12">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="service-history-section" id="service-history">
+            <h2>Service History</h2>
+            <table id="appointment-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Vehicle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Appointments will be dynamically added here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    
+    <script>
+        // Function to load and display appointments from localStorage
+        function loadAppointments() {
+    const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+    const tableBody = document.querySelector("#appointment-table tbody");
+
+    // Clear the table
+    tableBody.innerHTML = "";
+
+    if (appointments.length === 0) {
+        const emptyRow = document.createElement("tr");
+        const emptyCell = document.createElement("td");
+        emptyCell.setAttribute("colspan", "4");
+        emptyCell.textContent = "No appointments found.";
+        emptyRow.appendChild(emptyCell);
+        tableBody.appendChild(emptyRow);
+        return;
+    }
+
+    // Helper function to format the service name
+    function capitalizeService(service) {
+        return service.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+    }
+
+    // Helper function to convert time to 12-hour format
+    function formatTime(time24) {
+        const [hours, minutes] = time24.split(":").map(Number);
+        const period = hours >= 12 ? "PM" : "AM";
+        const formattedHours = hours % 12 || 12; // Convert 0 or 12 to 12
+        return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${period}`;
+    }
+
+    // Helper function to format date to "Month Day, Year"
+    function formatDate(dateString) {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+
+    // Populate the table with appointment data
+    appointments.forEach((appointment) => {
+        const row = document.createElement("tr");
+
+        // Create cells for each piece of information
+        const serviceCell = document.createElement("td");
+        serviceCell.textContent = capitalizeService(appointment.service);
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = formatDate(appointment.date);
+
+        const timeCell = document.createElement("td");
+        timeCell.textContent = formatTime(appointment.time);
+
+        const vehicleCell = document.createElement("td");
+        vehicleCell.textContent = `${appointment.vehicleYear} ${appointment.vehicleMake} ${appointment.vehicleModel}`;
+
+        // Append cells to the row
+        row.appendChild(serviceCell);
+        row.appendChild(dateCell);
+        row.appendChild(timeCell);
+        row.appendChild(vehicleCell);
+
+        // Append row to the table body
+        tableBody.appendChild(row);
+    });
+}
+
+// Load appointments when the page loads
+window.onload = loadAppointments;
+
+    </script>
+    
+
+</body>
+</html>
